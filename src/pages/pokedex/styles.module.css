@@ -1,45 +1,45 @@
 .pokedex {
-  margin-top: 4.375rem;
-  width: 62.5rem;
-
   header {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    gap: 1.375rem;
+    align-items: center;
+    gap: 1.5rem;
+
+    margin-top: 4.375rem;
 
     > span {
-      font-size: 1.5rem;
+      font-size: 1rem;
       color: var(--color-black);
+      text-align: center;
     }
 
     > input {
       width: 100%;
-      padding: 1rem 2rem;
+      padding: 0.75rem 1rem;
       border: 0;
       outline: transparent;
       background-color: #f2f2f2;
-      border-radius: 2.5rem;
+      border-radius: 2rem;
       font-size: 1rem;
       box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.15);
     }
 
     .favoritesToggle {
-      align-self: flex-start;
+      align-self: center;
     }
   }
 
   main {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 2rem 0;
 
     .pokemonList {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-      margin-top: 4rem;
+      grid-template-columns: 1fr;
+      gap: 2rem;
       width: 100%;
     }
 
@@ -48,17 +48,67 @@
       flex-direction: column;
       align-items: center;
       gap: 1rem;
-
-      margin-top: 4rem;
+      margin-top: 2rem;
 
       p:first-child {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         color: var(--color-black);
       }
 
       p:last-child {
         font-size: 1rem;
         color: var(--color-black);
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .pokedex {
+    width: 100%;
+    padding: 0 1.5rem;
+
+    header {
+      gap: 1.5rem;
+
+      > span {
+        font-size: 1.25rem;
+      }
+
+      > input {
+        padding: 1rem 1.5rem;
+      }
+
+      .favoritesToggle {
+        align-self: flex-start;
+      }
+    }
+
+    main {
+      gap: 2rem;
+
+      .pokemonList {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .pokedex {
+    max-width: 1024px;
+
+    header {
+      > span {
+        font-size: 1.5rem;
+      }
+    }
+
+    main {
+      .pokemonList {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
       }
     }
   }
