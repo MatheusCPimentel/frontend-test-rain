@@ -1,5 +1,6 @@
 import styles from "./styles.module.css";
 import homeImage from "../../assets/home_image.png";
+import { Link } from "react-router-dom";
 
 export function Home() {
   return (
@@ -12,7 +13,9 @@ export function Home() {
           abilities
         </h6>
 
-        <button>See pokemons</button>
+        <Link to="/pokedex">
+          <button>See pokemons</button>
+        </Link>
       </div>
 
       <img src={homeImage} alt="Banner image" />

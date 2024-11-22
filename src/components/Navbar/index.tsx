@@ -19,7 +19,7 @@ export const Navbar = () => {
   ];
 
   return (
-    <div className={styles.navbarContainer}>
+    <header className={styles.navbarContainer}>
       <div className={styles.navbarContent}>
         <img src={logo} alt="Logo" />
         <div>
@@ -35,6 +35,6 @@ export const Navbar = () => {
           ))}
         </div>
       </div>
-    </div>
+    </header>
   );
 };
