@@ -5,14 +5,18 @@ import { fetchWrapper } from "../../services/api";
 import { Pokemon } from "../../types/pokemon";
 import { PokemonPagination } from "../../types/pokemonPagination";
 import { PokemonCard } from "../../components/PokemonCard";
+import { Pagination } from "../../components/Pagination";
 
 export function Pokedex() {
   const [hasToShowOnlyFavorites, setHasToShowOnlyFavorites] = useState(false);
   const [pokemonInputValue, setPokemonInputValue] = useState("");
   const [pokemonsToShow, setPokemonsToShow] = useState<Pokemon[]>([]);
   const [favoriteIds, setFavoriteIds] = useState<number[]>([]);
-  const [debouncedSearch, setDebouncedSearch] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [pokemonsNumber, setPokemonsNumber] = useState(0);
+
+  const ITEMS_PER_PAGE = 20;
 
   const loadFavorites = () => {
     const storedFavorites = localStorage.getItem("favorites");
@@ -35,12 +39,15 @@ export function Pokedex() {
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
 
-  const fetchInitialPokemons = async () => {
+  const fetchPokemonsByPage = async (page: number) => {
+    const offset = (page - 1) * ITEMS_PER_PAGE;
+
     const { data: paginationData } = await fetchWrapper<PokemonPagination>(
-      "pokemon?limit=20&offset=0"
+      `pokemon?limit=${ITEMS_PER_PAGE}&offset=${offset}`
     );
 
     setPokemonsNumber(paginationData.count);
+    setTotalPages(Math.ceil(paginationData.count / ITEMS_PER_PAGE));
 
     const detailedPokemons = await Promise.all(
       paginationData.results.map(async (pokemon) => {
@@ -52,44 +59,28 @@ export function Pokedex() {
     setPokemonsToShow(detailedPokemons);
   };
 
-  const fetchPokemon = async (searchValue: string) => {
-    if (!searchValue) {
-      fetchInitialPokemons();
-      return;
-    }
+  const filteredPokemons = hasToShowOnlyFavorites
+    ? pokemonsToShow.filter((pokemon) => favoriteIds.includes(pokemon.id))
+    : pokemonsToShow;
 
-    try {
-      const { data } = await fetchWrapper<Pokemon>(
-        `pokemon/${searchValue.toLowerCase()}`
-      );
-
-      setPokemonsToShow([data]);
-    } catch (error) {
-      console.error(error);
-      setPokemonsToShow([]);
-    }
-  };
-
-  const onInputChange = (value: string) => {
-    setPokemonInputValue(value);
-
-    if (debouncedSearch) clearTimeout(debouncedSearch);
-
-    setDebouncedSearch(
-      setTimeout(() => {
-        fetchPokemon(value);
-      }, 500)
-    );
+  const paginatedFavorites = () => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return filteredPokemons.slice(startIndex, endIndex);
   };
 
   useEffect(() => {
     loadFavorites();
-    fetchInitialPokemons();
-  }, []);
+    fetchPokemonsByPage(currentPage);
+  }, [currentPage]);
 
-  const filteredPokemons = hasToShowOnlyFavorites
-    ? pokemonsToShow.filter((pokemon) => favoriteIds.includes(pokemon.id))
-    : pokemonsToShow;
+  useEffect(() => {
+    if (hasToShowOnlyFavorites) {
+      setTotalPages(Math.ceil(favoriteIds.length / ITEMS_PER_PAGE));
+    } else {
+      fetchPokemonsByPage(1);
+    }
+  }, [hasToShowOnlyFavorites]);
 
   return (
     <div className={styles.pokedex}>
@@ -102,7 +93,7 @@ export function Pokedex() {
         <input
           type="text"
           value={pokemonInputValue}
-          onChange={(e) => onInputChange(e.target.value)}
+          onChange={(e) => setPokemonInputValue(e.target.value)}
           placeholder="Find your Pokémon..."
         />
 
@@ -117,14 +108,23 @@ export function Pokedex() {
       <main>
         {filteredPokemons.length > 0 ? (
           <div className={styles.pokemonList}>
-            {filteredPokemons.map((pokemon) => (
-              <PokemonCard
-                key={pokemon.id}
-                pokemon={pokemon}
-                isFavorite={favoriteIds.includes(pokemon.id)}
-                toggleFavorite={toggleFavorite}
-              />
-            ))}
+            {hasToShowOnlyFavorites
+              ? paginatedFavorites().map((pokemon) => (
+                  <PokemonCard
+                    key={pokemon.id}
+                    pokemon={pokemon}
+                    isFavorite={favoriteIds.includes(pokemon.id)}
+                    toggleFavorite={toggleFavorite}
+                  />
+                ))
+              : filteredPokemons.map((pokemon) => (
+                  <PokemonCard
+                    key={pokemon.id}
+                    pokemon={pokemon}
+                    isFavorite={favoriteIds.includes(pokemon.id)}
+                    toggleFavorite={toggleFavorite}
+                  />
+                ))}
           </div>
         ) : (
           <div className={styles.noResultsContainer}>
@@ -135,6 +135,14 @@ export function Pokedex() {
               and not just part of the Pokémon's name.
             </p>
           </div>
+        )}
+
+        {!hasToShowOnlyFavorites && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
         )}
       </main>
     </div>
