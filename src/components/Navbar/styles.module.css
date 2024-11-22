@@ -75,6 +75,10 @@
     display: none;
   }
 
+  .navbarContent {
+    padding: 0 2rem;
+  }
+
   .navItems {
     display: flex;
     position: static;
@@ -88,5 +92,12 @@
   .navItem {
     font-size: 1rem;
     padding: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbarContent {
+    max-width: 1024px;
+    margin: 0 auto;
   }
 }
