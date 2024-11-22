@@ -14,27 +14,21 @@ export function Pokedex() {
   const [pokemonsNumber, setPokemonsNumber] = useState(0);
 
   const fetchInitialPokemons = async () => {
-    try {
-      const { data: paginationData } = await fetchWrapper<PokemonPagination>(
-        "pokemon?limit=20&offset=0"
-      );
+    const { data: paginationData } = await fetchWrapper<PokemonPagination>(
+      "pokemon?limit=20&offset=0"
+    );
 
-      setPokemonsNumber(paginationData.count);
+    setPokemonsNumber(paginationData.count);
 
-      const detailedPokemons = await Promise.all(
-        paginationData.results.map(async (pokemon) => {
-          const { data } = await fetchWrapper<Pokemon>(
-            `pokemon/${pokemon.name}`
-          );
+    const detailedPokemons = await Promise.all(
+      paginationData.results.map(async (pokemon) => {
+        const { data } = await fetchWrapper<Pokemon>(`pokemon/${pokemon.name}`);
 
-          return data;
-        })
-      );
+        return data;
+      })
+    );
 
-      setPokemonsToShow(detailedPokemons);
-    } catch (error) {
-      console.error("Failed to fetch initial Pokémon list:", error);
-    }
+    setPokemonsToShow(detailedPokemons);
   };
 
   const fetchPokemon = async (searchValue: string) => {
