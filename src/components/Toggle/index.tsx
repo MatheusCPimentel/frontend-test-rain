@@ -4,11 +4,17 @@ interface ToggleProps {
   isChecked: boolean;
   setIsChecked: (value: boolean) => void;
   label: string;
+  className?: string;
 }
 
-export function Toggle({ isChecked, setIsChecked, label }: ToggleProps) {
+export function Toggle({
+  isChecked,
+  setIsChecked,
+  label,
+  className = "",
+}: ToggleProps) {
   return (
-    <label className={styles.toggleWrapper}>
+    <label className={`${styles.toggleWrapper} ${className}`}>
       <div className={styles.toggle}>
         <input
           type="checkbox"
