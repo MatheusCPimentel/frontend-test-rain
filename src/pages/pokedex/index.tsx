@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Toggle } from "../../components/Toggle";
 import { fetchWrapper } from "../../services/api";
 import { Pokemon } from "../../types/pokemon";
+import { PokemonPagination } from "../../types/pokemonPagination";
 
 export function Pokedex() {
   const [hasToShowOnlyFavorites, setHasToShowOnlyFavorites] = useState(false);
@@ -11,15 +12,33 @@ export function Pokedex() {
   const [debouncedSearch, setDebouncedSearch] = useState<number | null>(null);
   const [pokemonsNumber, setPokemonsNumber] = useState(0);
 
-  const fetchPokemonsNumber = async () => {
-    const { data } = await fetchWrapper<{ count: number }>("pokemon");
+  const fetchInitialPokemons = async () => {
+    try {
+      const { data: paginationData } = await fetchWrapper<PokemonPagination>(
+        "pokemon?limit=20&offset=0"
+      );
 
-    setPokemonsNumber(data.count);
+      setPokemonsNumber(paginationData.count);
+
+      const detailedPokemons = await Promise.all(
+        paginationData.results.map(async (pokemon) => {
+          const { data } = await fetchWrapper<Pokemon>(
+            `pokemon/${pokemon.name}`
+          );
+
+          return data;
+        })
+      );
+
+      setPokemonsToShow(detailedPokemons);
+    } catch (error) {
+      console.error("Failed to fetch initial Pokémon list:", error);
+    }
   };
 
   const fetchPokemon = async (searchValue: string) => {
     if (!searchValue) {
-      setPokemonsToShow([]);
+      fetchInitialPokemons();
       return;
     }
 
@@ -43,7 +62,7 @@ export function Pokedex() {
   };
 
   useEffect(() => {
-    fetchPokemonsNumber();
+    fetchInitialPokemons();
   }, []);
 
   return (
@@ -71,7 +90,19 @@ export function Pokedex() {
 
       <main>
         {pokemonsToShow.length > 0 ? (
-          <h1>Pokémon</h1>
+          <div className={styles.pokemonList}>
+            {pokemonsToShow.map((pokemon) => (
+              <div key={pokemon.id} className={styles.pokemonCard}>
+                <img
+                  src={pokemon.sprites.front_default}
+                  alt={pokemon.name}
+                  className={styles.pokemonImage}
+                />
+
+                <span>{pokemon.name}</span>
+              </div>
+            ))}
+          </div>
         ) : (
           <span className={styles.startTypingPhrase}>
             Start typing or select a filter to see <strong>Pokémons</strong>!

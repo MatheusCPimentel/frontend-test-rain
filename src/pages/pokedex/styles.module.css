@@ -33,6 +33,14 @@
     display: flex;
     justify-content: center;
 
+    .pokemonList {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+      width: 100%;
+    }
+
     .startTypingPhrase {
       margin-top: 64px;
       font-size: 1.5rem;
