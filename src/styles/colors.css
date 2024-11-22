@@ -8,12 +8,22 @@
   --color-dark: #212121;
 
   /* Pokémon Types */
-  --color-steel: #a1a1a1;
+  --color-normal: #a8a878;
+  --color-fire: #f76545;
+  --color-water: #6890f0;
+  --color-electric: #f7c545;
   --color-grass: #70a83b;
   --color-ice: #a2cff0;
-  --color-fire: #f76545;
-  --color-normal: #76aadb;
+  --color-fighting: #c03028;
   --color-poison: #a974bc;
-  --color-ground: #9b897b;
-  --color-electric: #f7c545;
+  --color-ground: #e0c068;
+  --color-flying: #a1c6f0;
+  --color-psychic: #f85888;
+  --color-bug: #a8b820;
+  --color-rock: #b8a038;
+  --color-ghost: #705898;
+  --color-dragon: #7038f8;
+  --color-dark: #705848;
+  --color-steel: #b8b8d0;
+  --color-fairy: #ee99ac;
 }

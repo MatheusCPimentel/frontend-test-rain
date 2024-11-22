@@ -18,7 +18,7 @@
       padding: 16px 32px;
       border: 0;
       outline: transparent;
-      background-color: #F2F2F2;
+      background-color: #f2f2f2;
       border-radius: 40px;
       font-size: 1rem;
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
@@ -37,14 +37,117 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
-      margin-top: 32px;
+      margin: 64px 0;
       width: 100%;
     }
 
-    .startTypingPhrase {
-      margin-top: 64px;
-      font-size: 1.5rem;
-      color: var(--color-dark);
+    .pokemonCard {
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      padding: 16px;
+      transition: transform 0.2s;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 8px;
+        margin: 0 auto;        
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        color: var(--color-dark);
+        margin-bottom: 12px;
+      }
+
+      .pokemonDetails {
+        font-size: 0.9rem;
+        color: #666;
+        text-align: left;
+
+        p {
+          margin: 4px 0;
+        }
+      }
+    }
+
+    .normal {
+      border-top: 6px solid var(--color-normal);
+    }
+
+    .fire {
+      border-top: 6px solid var(--color-fire);
+    }
+
+    .water {
+      border-top: 6px solid var(--color-water);
+    }
+
+    .electric {
+      border-top: 6px solid var(--color-electric);
+    }
+
+    .grass {
+      border-top: 6px solid var(--color-grass);
+    }
+
+    .ice {
+      border-top: 6px solid var(--color-ice);
+    }
+
+    .fighting {
+      border-top: 6px solid var(--color-fighting);
+    }
+
+    .poison {
+      border-top: 6px solid var(--color-poison);
+    }
+
+    .ground {
+      border-top: 6px solid var(--color-ground);
+    }
+
+    .flying {
+      border-top: 6px solid var(--color-flying);
+    }
+
+    .psychic {
+      border-top: 6px solid var(--color-psychic);
+    }
+
+    .bug {
+      border-top: 6px solid var(--color-bug);
+    }
+
+    .rock {
+      border-top: 6px solid var(--color-rock);
+    }
+
+    .ghost {
+      border-top: 6px solid var(--color-ghost);
+    }
+
+    .dragon {
+      border-top: 6px solid var(--color-dragon);
+    }
+
+    .dark {
+      border-top: 6px solid var(--color-dark);
+    }
+
+    .steel {
+      border-top: 6px solid var(--color-steel);
+    }
+
+    .fairy {
+      border-top: 6px solid var(--color-fairy);
     }
   }
 }

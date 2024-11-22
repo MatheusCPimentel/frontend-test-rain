@@ -4,6 +4,7 @@ import { Toggle } from "../../components/Toggle";
 import { fetchWrapper } from "../../services/api";
 import { Pokemon } from "../../types/pokemon";
 import { PokemonPagination } from "../../types/pokemonPagination";
+import { capitalizeWord } from "../../utils/capitalizeWord";
 
 export function Pokedex() {
   const [hasToShowOnlyFavorites, setHasToShowOnlyFavorites] = useState(false);
@@ -92,14 +93,45 @@ export function Pokedex() {
         {pokemonsToShow.length > 0 ? (
           <div className={styles.pokemonList}>
             {pokemonsToShow.map((pokemon) => (
-              <div key={pokemon.id} className={styles.pokemonCard}>
+              <div
+                key={pokemon.id}
+                className={`${styles.pokemonCard} ${
+                  styles[pokemon.types[0].type.name]
+                }`}
+              >
                 <img
                   src={pokemon.sprites.front_default}
                   alt={pokemon.name}
                   className={styles.pokemonImage}
                 />
 
-                <span>{pokemon.name}</span>
+                <h3 className={styles.pokemonName}>
+                  {capitalizeWord(pokemon.name)}
+                </h3>
+
+                <div className={styles.pokemonDetails}>
+                  <p>
+                    <strong>Type: </strong>
+                    {pokemon.types
+                      .map((t) => capitalizeWord(t.type.name))
+                      .join(", ")}
+                  </p>
+
+                  <p>
+                    <strong>Height:</strong> {pokemon.height / 10}m
+                  </p>
+
+                  <p>
+                    <strong>Weight:</strong> {pokemon.weight / 10}kg
+                  </p>
+
+                  <p>
+                    <strong>Abilities: </strong>
+                    {pokemon.abilities
+                      .map((a) => capitalizeWord(a.ability.name))
+                      .join(", ")}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
