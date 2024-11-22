@@ -1,12 +1,12 @@
 .pokedex {
-  margin-top: 70px;
-  width: 1000px;
+  margin-top: 4.375rem;
+  width: 62.5rem;
 
   header {
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 22px;
+    gap: 1.375rem;
 
     > span {
       font-size: 1.5rem;
@@ -15,13 +15,13 @@
 
     > input {
       width: 100%;
-      padding: 16px 32px;
+      padding: 1rem 2rem;
       border: 0;
       outline: transparent;
       background-color: #f2f2f2;
-      border-radius: 40px;
+      border-radius: 2.5rem;
       font-size: 1rem;
-      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.15);
     }
 
     .favoritesToggle {
@@ -32,14 +32,14 @@
   main {
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    margin-bottom: 32px;
+    gap: 2rem;
+    margin-bottom: 2rem;
 
     .pokemonList {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 64px;
+      gap: 1rem;
+      margin-top: 4rem;
       width: 100%;
     }
 
@@ -47,9 +47,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 1rem;
 
-      margin-top: 64px;
+      margin-top: 4rem;
 
       p:first-child {
         font-size: 1.5rem;

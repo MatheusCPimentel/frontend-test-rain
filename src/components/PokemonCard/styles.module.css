@@ -1,10 +1,10 @@
 .pokemonCard {
   position: relative;
   background-color: #fff;
-  border-radius: 16px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
   text-align: center;
-  padding: 16px;
+  padding: 1rem;
   transition: transform 0.2s;
 
   &:hover {
@@ -12,16 +12,16 @@
   }
 
   img {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 8px;
-    margin: 0 auto;        
+    width: 6.25rem;
+    height: 6.25rem;
+    margin: 0 auto;
+    margin-bottom: 0.5rem;
   }
 
   h3 {
     font-size: 1.25rem;
     color: var(--color-black);
-    margin-bottom: 12px;
+    margin-bottom: 0.75rem;
   }
 
   .pokemonDetails {
@@ -30,14 +30,14 @@
     text-align: left;
 
     p {
-      margin: 4px 0;
+      margin: 0.25rem 0;
     }
   }
 
   .favoriteIcon {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 0.5rem;
+    right: 0.5rem;
     cursor: pointer;
     transition: transform 0.2s;
 
@@ -48,73 +48,73 @@
 }
 
 .normal {
-  border-top: 6px solid var(--color-normal);
+  border-top: 0.375rem solid var(--color-normal);
 }
 
 .fire {
-  border-top: 6px solid var(--color-fire);
+  border-top: 0.375rem solid var(--color-fire);
 }
 
 .water {
-  border-top: 6px solid var(--color-water);
+  border-top: 0.375rem solid var(--color-water);
 }
 
 .electric {
-  border-top: 6px solid var(--color-electric);
+  border-top: 0.375rem solid var(--color-electric);
 }
 
 .grass {
-  border-top: 6px solid var(--color-grass);
+  border-top: 0.375rem solid var(--color-grass);
 }
 
 .ice {
-  border-top: 6px solid var(--color-ice);
+  border-top: 0.375rem solid var(--color-ice);
 }
 
 .fighting {
-  border-top: 6px solid var(--color-fighting);
+  border-top: 0.375rem solid var(--color-fighting);
 }
 
 .poison {
-  border-top: 6px solid var(--color-poison);
+  border-top: 0.375rem solid var(--color-poison);
 }
 
 .ground {
-  border-top: 6px solid var(--color-ground);
+  border-top: 0.375rem solid var(--color-ground);
 }
 
 .flying {
-  border-top: 6px solid var(--color-flying);
+  border-top: 0.375rem solid var(--color-flying);
 }
 
 .psychic {
-  border-top: 6px solid var(--color-psychic);
+  border-top: 0.375rem solid var(--color-psychic);
 }
 
 .bug {
-  border-top: 6px solid var(--color-bug);
+  border-top: 0.375rem solid var(--color-bug);
 }
 
 .rock {
-  border-top: 6px solid var(--color-rock);
+  border-top: 0.375rem solid var(--color-rock);
 }
 
 .ghost {
-  border-top: 6px solid var(--color-ghost);
+  border-top: 0.375rem solid var(--color-ghost);
 }
 
 .dragon {
-  border-top: 6px solid var(--color-dragon);
+  border-top: 0.375rem solid var(--color-dragon);
 }
 
 .dark {
-  border-top: 6px solid var(--color-dark);
+  border-top: 0.375rem solid var(--color-dark);
 }
 
 .steel {
-  border-top: 6px solid var(--color-steel);
+  border-top: 0.375rem solid var(--color-steel);
 }
 
 .fairy {
-  border-top: 6px solid var(--color-fairy);
+  border-top: 0.375rem solid var(--color-fairy);
 }
