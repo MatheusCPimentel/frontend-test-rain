@@ -6,7 +6,7 @@ import { capitalizeWord } from "../../utils/capitalizeWord";
 interface PokemonCardProps {
   pokemon: Pokemon;
   isFavorite: boolean;
-  toggleFavorite: (pokemonId: number) => void;
+  toggleFavorite: (pokemon: Pokemon) => void;
 }
 
 export function PokemonCard({
@@ -14,45 +14,55 @@ export function PokemonCard({
   isFavorite,
   toggleFavorite,
 }: PokemonCardProps) {
+  const mainType = pokemon.types?.[0]?.type?.name || "unknown";
+
   return (
-    <div
-      className={`${styles.pokemonCard} ${styles[pokemon.types[0].type.name]}`}
-    >
+    <div className={`${styles.pokemonCard} ${styles[mainType]}`}>
       <div
         className={styles.favoriteIcon}
-        onClick={() => toggleFavorite(pokemon.id)}
+        onClick={() => toggleFavorite(pokemon)}
       >
         <Heart size={24} fill={isFavorite ? "red" : "none"} color="red" />
       </div>
 
       <img
-        src={pokemon.sprites.front_default}
-        alt={pokemon.name}
+        src={pokemon.sprites.front_default || ""}
+        alt={pokemon.name || "Unknown"}
         className={styles.pokemonImage}
       />
 
-      <h3 className={styles.pokemonName}>{capitalizeWord(pokemon.name)}</h3>
+      <h3 className={styles.pokemonName}>
+        {capitalizeWord(pokemon.name || "Unknown")}
+      </h3>
 
       <div className={styles.pokemonDetails}>
-        <p>
-          <strong>Type: </strong>
-          {pokemon.types.map((t) => capitalizeWord(t.type.name)).join(", ")}
-        </p>
+        {pokemon.types && (
+          <p>
+            <strong>Type: </strong>
+            {pokemon.types.map((t) => capitalizeWord(t.type.name)).join(", ")}
+          </p>
+        )}
 
-        <p>
-          <strong>Height:</strong> {pokemon.height / 10}m
-        </p>
+        {pokemon.height && (
+          <p>
+            <strong>Height:</strong> {pokemon.height / 10}m
+          </p>
+        )}
 
-        <p>
-          <strong>Weight:</strong> {pokemon.weight / 10}kg
-        </p>
+        {pokemon.weight && (
+          <p>
+            <strong>Weight:</strong> {pokemon.weight / 10}kg
+          </p>
+        )}
 
-        <p>
-          <strong>Abilities: </strong>
-          {pokemon.abilities
-            .map((a) => capitalizeWord(a.ability.name))
-            .join(", ")}
-        </p>
+        {pokemon.abilities && (
+          <p>
+            <strong>Abilities: </strong>
+            {pokemon.abilities
+              .map((a) => capitalizeWord(a.ability.name))
+              .join(", ")}
+          </p>
+        )}
       </div>
     </div>
   );

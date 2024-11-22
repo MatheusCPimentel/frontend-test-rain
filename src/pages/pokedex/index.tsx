@@ -11,7 +11,7 @@ export function Pokedex() {
   const [hasToShowOnlyFavorites, setHasToShowOnlyFavorites] = useState(false);
   const [pokemonInputValue, setPokemonInputValue] = useState("");
   const [pokemonsToShow, setPokemonsToShow] = useState<Pokemon[]>([]);
-  const [favoriteIds, setFavoriteIds] = useState<number[]>([]);
+  const [favorites, setFavorites] = useState<Pokemon[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [pokemonsNumber, setPokemonsNumber] = useState(0);
@@ -22,21 +22,37 @@ export function Pokedex() {
     const storedFavorites = localStorage.getItem("favorites");
 
     if (storedFavorites) {
-      setFavoriteIds(JSON.parse(storedFavorites));
+      try {
+        const parsedFavorites: Pokemon[] = JSON.parse(storedFavorites);
+
+        const validFavorites = parsedFavorites.filter(
+          (pokemon) => pokemon.id && pokemon.name && pokemon.types
+        );
+
+        setPokemonsToShow(validFavorites);
+      } catch (error) {
+        console.error("Failed to parse favorites from localStorage:", error);
+      }
     }
   };
 
-  const toggleFavorite = (pokemonId: number) => {
-    let updatedFavorites: number[];
+  const saveFavorites = (updatedFavorites: Pokemon[]) => {
+    setFavorites(updatedFavorites);
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
 
-    if (favoriteIds.includes(pokemonId)) {
-      updatedFavorites = favoriteIds.filter((id) => id !== pokemonId);
+  const toggleFavorite = (pokemon: Pokemon) => {
+    const isAlreadyFavorite = favorites.some((fav) => fav.id === pokemon.id);
+
+    let updatedFavorites: Pokemon[];
+
+    if (isAlreadyFavorite) {
+      updatedFavorites = favorites.filter((fav) => fav.id !== pokemon.id);
     } else {
-      updatedFavorites = [...favoriteIds, pokemonId];
+      updatedFavorites = [...favorites, pokemon];
     }
 
-    setFavoriteIds(updatedFavorites);
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+    saveFavorites(updatedFavorites);
   };
 
   const fetchPokemonsByPage = async (page: number) => {
@@ -59,15 +75,7 @@ export function Pokedex() {
     setPokemonsToShow(detailedPokemons);
   };
 
-  const filteredPokemons = hasToShowOnlyFavorites
-    ? pokemonsToShow.filter((pokemon) => favoriteIds.includes(pokemon.id))
-    : pokemonsToShow;
-
-  const paginatedFavorites = () => {
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    return filteredPokemons.slice(startIndex, endIndex);
-  };
+  const displayedPokemons = hasToShowOnlyFavorites ? favorites : pokemonsToShow;
 
   useEffect(() => {
     loadFavorites();
@@ -75,9 +83,7 @@ export function Pokedex() {
   }, [currentPage]);
 
   useEffect(() => {
-    if (hasToShowOnlyFavorites) {
-      setTotalPages(Math.ceil(favoriteIds.length / ITEMS_PER_PAGE));
-    } else {
+    if (!hasToShowOnlyFavorites) {
       fetchPokemonsByPage(1);
     }
   }, [hasToShowOnlyFavorites]);
@@ -106,30 +112,20 @@ export function Pokedex() {
       </header>
 
       <main>
-        {filteredPokemons.length > 0 ? (
+        {displayedPokemons.length > 0 ? (
           <div className={styles.pokemonList}>
-            {hasToShowOnlyFavorites
-              ? paginatedFavorites().map((pokemon) => (
-                  <PokemonCard
-                    key={pokemon.id}
-                    pokemon={pokemon}
-                    isFavorite={favoriteIds.includes(pokemon.id)}
-                    toggleFavorite={toggleFavorite}
-                  />
-                ))
-              : filteredPokemons.map((pokemon) => (
-                  <PokemonCard
-                    key={pokemon.id}
-                    pokemon={pokemon}
-                    isFavorite={favoriteIds.includes(pokemon.id)}
-                    toggleFavorite={toggleFavorite}
-                  />
-                ))}
+            {displayedPokemons.map((pokemon) => (
+              <PokemonCard
+                key={pokemon.id}
+                pokemon={pokemon}
+                isFavorite={favorites.some((fav) => fav.id === pokemon.id)}
+                toggleFavorite={toggleFavorite}
+              />
+            ))}
           </div>
         ) : (
           <div className={styles.noResultsContainer}>
             <p>No results found based on your search.</p>
-
             <p>
               Please ensure that you have written the Pokémon name correctly,
               and not just part of the Pokémon's name.
