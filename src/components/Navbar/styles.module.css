@@ -1,0 +1,32 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  padding: 12px;
+  background-color: #333;
+  color: white;
+  height: 50px;
+
+  img {
+    height: 30px;
+  }
+
+  > div {
+    display: flex;
+    gap: 12px;
+
+    .navItem {
+      color: white;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .navItem__active {
+      font-weight: bold;
+    }
+  }
+}
