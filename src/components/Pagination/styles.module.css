@@ -1,6 +1,5 @@
 .pagination {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   gap: 16px;
 
@@ -29,4 +28,8 @@
   }
 }
 
-
+@media (min-width: 1024px) {
+  .pagination {
+    align-self: flex-end;
+  }
+}
