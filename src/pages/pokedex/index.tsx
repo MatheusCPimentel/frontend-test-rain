@@ -3,6 +3,9 @@ import styles from "./styles.module.css";
 import { useEffect, useState } from "react";
 import { Toggle } from "../../components/Toggle";
 import { fetchWrapper } from "../../services/api";
+import { Pagination } from "../../types/pagination";
+import { PokemonType } from "../../types/pokemonType";
+import { capitalizeWord } from "../../utils/capitalizeWord";
 
 export function Pokedex() {
   const [isTypeModalOpen, setIsTypeModalOpen] = useState(false);
@@ -12,6 +15,8 @@ export function Pokedex() {
   const [selectedPokemonType, setSelectedPokemonType] = useState<string | null>(
     null
   );
+
+  const [pokemonTypeOptions, setPokemonTypeOptions] = useState<string[]>([]);
 
   const [pokemonsToShow, setPokemonsToShow] = useState([]);
 
@@ -23,11 +28,19 @@ export function Pokedex() {
 
   const getPokemons = async () => {
     const response = await fetchWrapper("pokemon");
-    console.log(response);
+  };
+
+  const getAllPokemonTypes = async () => {
+    const { data } = await fetchWrapper<Pagination<PokemonType>>("type");
+
+    const allAvailableTypes = data.results.map((type) => type.name);
+
+    setPokemonTypeOptions(allAvailableTypes);
   };
 
   useEffect(() => {
     getPokemons();
+    getAllPokemonTypes();
   }, []);
 
   return (
@@ -57,25 +70,23 @@ export function Pokedex() {
 
             {isTypeModalOpen && (
               <div className={styles.typeModal}>
-                {["Fire", "Water", "Grass", "Electric", "Poison", "Flying"].map(
-                  (type) => (
-                    <label
-                      key={type}
-                      className={styles.typeOption}
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <input
-                        type="radio"
-                        name="pokemonType"
-                        value={type}
-                        checked={selectedPokemonType === type}
-                        onChange={() => setSelectedPokemonType(type)}
-                      />
+                {pokemonTypeOptions.map((type) => (
+                  <label
+                    key={type}
+                    className={styles.typeOption}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <input
+                      type="radio"
+                      name="pokemonType"
+                      value={type}
+                      checked={selectedPokemonType === type}
+                      onChange={() => setSelectedPokemonType(type)}
+                    />
 
-                      <span>{type}</span>
-                    </label>
-                  )
-                )}
+                    <span>{capitalizeWord(type)}</span>
+                  </label>
+                ))}
 
                 <button
                   className={styles.applyButton}
