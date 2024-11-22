@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { fetchWrapper } from "./services/api";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Login } from "./pages/login";
@@ -9,24 +7,6 @@ import { Pokedex } from "./pages/pokedex";
 import styles from "./App.module.css";
 
 function App() {
-  const getPokemons = async () => {
-    /* Endpoints needed: 
-    MAIN:
-    pokemon?offset=20&limit=20
-
-    FILTER:
-    type/{type}
-    pokemon/{pokemon}
-    */
-
-    const response = await fetchWrapper("pokemon/charmander");
-    console.log(response);
-  };
-
-  useEffect(() => {
-    getPokemons();
-  }, []);
-
   return (
     <Router>
       <Navbar />
