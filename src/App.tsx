@@ -6,6 +6,7 @@ import { Login } from "./pages/login";
 import { Navbar } from "./components/Navbar";
 import { Home } from "./pages/home";
 import { Pokedex } from "./pages/pokedex";
+import styles from "./App.module.css";
 
 function App() {
   const getPokemons = async () => {
@@ -30,11 +31,13 @@ function App() {
     <Router>
       <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/pokedex" element={<Pokedex />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <div className={styles.pageContent}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/pokedex" element={<Pokedex />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </div>
     </Router>
   );
 }
