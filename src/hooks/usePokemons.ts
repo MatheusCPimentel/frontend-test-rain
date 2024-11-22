@@ -7,11 +7,11 @@ export const usePokemons = (itemsPerPage: number) => {
   const [pokemonsToShow, setPokemonsToShow] = useState<Pokemon[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [pokemonsNumber, setPokemonsNumber] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingPokemons, setIsLoadingPokemons] = useState(false);
   const [debouncedSearch, setDebouncedSearch] = useState<number | null>(null);
 
   const fetchPokemonsByPage = async (page: number) => {
-    setIsLoading(true);
+    setIsLoadingPokemons(true);
 
     const offset = (page - 1) * itemsPerPage;
 
@@ -36,12 +36,12 @@ export const usePokemons = (itemsPerPage: number) => {
     } catch (error) {
       console.error("Failed to fetch Pokémons:", error);
     } finally {
-      setIsLoading(false);
+      setIsLoadingPokemons(false);
     }
   };
 
   const fetchPokemonByName = async (name: string) => {
-    setIsLoading(true);
+    setIsLoadingPokemons(true);
     try {
       const { data } = await fetchWrapper<Pokemon>(
         `pokemon/${name.toLowerCase()}`
@@ -52,7 +52,7 @@ export const usePokemons = (itemsPerPage: number) => {
       console.error("Pokemon not found:", error);
       setPokemonsToShow([]);
     } finally {
-      setIsLoading(false);
+      setIsLoadingPokemons(false);
     }
   };
 
@@ -76,6 +76,6 @@ export const usePokemons = (itemsPerPage: number) => {
     pokemonsNumber,
     fetchPokemonsByPage,
     searchWithDebounce,
-    isLoading,
+    isLoadingPokemons,
   };
 };

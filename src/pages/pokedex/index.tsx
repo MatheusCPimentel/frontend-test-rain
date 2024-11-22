@@ -17,7 +17,7 @@ export function Pokedex() {
     pokemonsNumber,
     fetchPokemonsByPage,
     searchWithDebounce,
-    isLoading,
+    isLoadingPokemons,
   } = usePokemons(ITEMS_PER_PAGE);
 
   const { favorites, toggleFavorite } = useFavorites();
@@ -34,13 +34,16 @@ export function Pokedex() {
 
   const displayedPokemons = hasToShowOnlyFavorites ? favorites : pokemonsToShow;
 
+  const hasToShowPagination =
+    !hasToShowOnlyFavorites && !pokemonInputValue.trim() && !isLoadingPokemons;
+
   const handleSearch = (value: string) => {
     setPokemonInputValue(value);
     searchWithDebounce(value, currentPage);
   };
 
   const renderListContent = () => {
-    if (isLoading) {
+    if (isLoadingPokemons) {
       return (
         <div className={styles.pokemonList}>
           {Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
@@ -103,7 +106,7 @@ export function Pokedex() {
       <main>
         {renderListContent()}
 
-        {!hasToShowOnlyFavorites && !pokemonInputValue.trim() && (
+        {hasToShowPagination && (
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
