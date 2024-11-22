@@ -19,20 +19,21 @@ export const Navbar = () => {
   ];
 
   return (
-    <div className={styles.navbar}>
-      <img src={logo} alt="Logo" />
-
-      <div>
-        {navItemsArr.map((item) => (
-          <Link
-            className={`${styles.navItem} ${
-              item.isActive ? styles.navItem__active : ""
-            }`}
-            to={item.link}
-          >
-            {item.name}
-          </Link>
-        ))}
+    <div className={styles.navbarContainer}>
+      <div className={styles.navbarContent}>
+        <img src={logo} alt="Logo" />
+        <div>
+          {navItemsArr.map((item) => (
+            <Link
+              className={`${styles.navItem} ${
+                item.isActive ? styles.navItem__active : ""
+              }`}
+              to={item.link}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
