@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import "./App.css";
 import { fetchWrapper } from "./services/api";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Main } from "./pages/main";
