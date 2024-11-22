@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { fetchWrapper } from "./services/api";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Main } from "./pages/main";
-import { Favorites } from "./pages/favorites";
+
 import { Login } from "./pages/login";
 import { Navbar } from "./components/Navbar";
+import { Home } from "./pages/home";
+import { Pokedex } from "./pages/pokedex";
 
 function App() {
   const getPokemons = async () => {
@@ -30,8 +31,8 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/pokedex" element={<Pokedex />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </Router>

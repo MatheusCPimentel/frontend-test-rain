@@ -7,14 +7,14 @@ export const Navbar = () => {
 
   const navItemsArr = [
     {
-      name: "Favorites",
-      isActive: pathname === "/favorites",
-      link: "/favorites",
-    },
-    {
-      name: "Main",
+      name: "Home",
       isActive: pathname === "/",
       link: "/",
+    },
+    {
+      name: "Pokédex",
+      isActive: pathname === "/pokedex",
+      link: "/pokedex",
     },
   ];
 

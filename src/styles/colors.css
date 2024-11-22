@@ -1,0 +1,19 @@
+:root {
+  /* Main colors */
+  --color-primary: #f2b807;
+  --color-second: #f28f16;
+  --color-third: #f5db13;
+  --color-danger: #d93e30;
+  --color-white: #f6f7f9;
+  --color-dark: #212121;
+
+  /* Pokémon Types */
+  --color-steel: #a1a1a1;
+  --color-grass: #70a83b;
+  --color-ice: #a2cff0;
+  --color-fire: #f76545;
+  --color-normal: #76aadb;
+  --color-poison: #a974bc;
+  --color-ground: #9b897b;
+  --color-electric: #f7c545;
+}

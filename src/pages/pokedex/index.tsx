@@ -1,9 +1,9 @@
 import styles from "./styles.module.css";
 
-export function Main() {
+export function Pokedex() {
   return (
     <div>
-      <h1>Main</h1>
+      <h1>Pokédex</h1>
     </div>
   );
 }
