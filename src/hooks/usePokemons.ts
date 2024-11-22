@@ -12,6 +12,7 @@ export const usePokemons = (itemsPerPage: number) => {
 
   const fetchPokemonsByPage = async (page: number) => {
     setIsLoading(true);
+
     const offset = (page - 1) * itemsPerPage;
 
     try {
@@ -41,7 +42,6 @@ export const usePokemons = (itemsPerPage: number) => {
 
   const fetchPokemonByName = async (name: string) => {
     setIsLoading(true);
-
     try {
       const { data } = await fetchWrapper<Pokemon>(
         `pokemon/${name.toLowerCase()}`
