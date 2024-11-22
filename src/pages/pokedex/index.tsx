@@ -16,6 +16,7 @@ export function Pokedex() {
 
   const loadFavorites = () => {
     const storedFavorites = localStorage.getItem("favorites");
+
     if (storedFavorites) {
       setFavoriteIds(JSON.parse(storedFavorites));
     }
@@ -23,6 +24,7 @@ export function Pokedex() {
 
   const toggleFavorite = (pokemonId: number) => {
     let updatedFavorites: number[];
+
     if (favoriteIds.includes(pokemonId)) {
       updatedFavorites = favoriteIds.filter((id) => id !== pokemonId);
     } else {
@@ -56,11 +58,16 @@ export function Pokedex() {
       return;
     }
 
-    const { data } = await fetchWrapper<Pokemon>(
-      `pokemon/${searchValue.toLowerCase()}`
-    );
+    try {
+      const { data } = await fetchWrapper<Pokemon>(
+        `pokemon/${searchValue.toLowerCase()}`
+      );
 
-    setPokemonsToShow([data]);
+      setPokemonsToShow([data]);
+    } catch (error) {
+      console.error(error);
+      setPokemonsToShow([]);
+    }
   };
 
   const onInputChange = (value: string) => {
@@ -120,9 +127,14 @@ export function Pokedex() {
             ))}
           </div>
         ) : (
-          <span className={styles.startTypingPhrase}>
-            Start typing or select a filter to see <strong>Pokémons</strong>!
-          </span>
+          <div className={styles.noResultsContainer}>
+            <p>No results found based on your search.</p>
+
+            <p>
+              Please ensure that you have written the Pokémon name correctly,
+              and not just part of the Pokémon's name.
+            </p>
+          </div>
         )}
       </main>
     </div>
