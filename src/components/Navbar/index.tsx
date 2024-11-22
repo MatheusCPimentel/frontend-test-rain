@@ -18,6 +18,10 @@ export const Navbar = () => {
     },
   ];
 
+  if (pathname === "/login") {
+    return null;
+  }
+
   return (
     <header className={styles.navbarContainer}>
       <div className={styles.navbarContent}>
