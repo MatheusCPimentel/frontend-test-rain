@@ -1,9 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Menu } from "lucide-react";
 import styles from "./styles.module.css";
 import logo from "../../assets/pokeapi_logo.png";
 
 export const Navbar = () => {
   const { pathname } = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItemsArr = [
     {
@@ -33,16 +36,31 @@ export const Navbar = () => {
   return (
     <header className={styles.navbarContainer}>
       <div className={styles.navbarContent}>
-        <img src={logo} alt="Logo" />
+        <img src={logo} alt="Logo" className={styles.logo} />
 
-        <div>
+        <button
+          className={styles.menuButton}
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+        >
+          <Menu size={24} />
+        </button>
+
+        <div
+          className={`${styles.navItems} ${
+            isMenuOpen ? styles.navItems__open : ""
+          }`}
+        >
           {navItemsArr.map((item) => (
             <Link
+              key={item.name}
               className={`${styles.navItem} ${
                 item.isActive ? styles.navItem__active : ""
               }`}
               to={item.link}
-              onClick={item.action}
+              onClick={() => {
+                item.action();
+                setIsMenuOpen(false);
+              }}
             >
               {item.name}
             </Link>

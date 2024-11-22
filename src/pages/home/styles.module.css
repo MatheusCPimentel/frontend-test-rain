@@ -6,6 +6,7 @@
   background: linear-gradient(to bottom, var(--color-third), var(--color-secondary));
   min-height: 100%;
   width: 100%;
+  padding: 2rem;
 
   > div {
     display: flex;
@@ -44,5 +45,39 @@
   img {
     width: 49.375rem;
     height: 42.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+
+    > div {
+      margin-left: 0;
+      width: 100%;
+      gap: 2rem;
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h6 {
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+
+      button {
+        width: 100%;
+        font-size: 1.25rem;
+      }
+    }
+
+    img {
+      width: 70%;
+      height: auto;
+      margin-top: 2rem;
+    }
   }
 }
