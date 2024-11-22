@@ -26,6 +26,7 @@ export const Navbar = () => {
     <header className={styles.navbarContainer}>
       <div className={styles.navbarContent}>
         <img src={logo} alt="Logo" />
+
         <div>
           {navItemsArr.map((item) => (
             <Link

@@ -27,7 +27,7 @@ export function Login() {
       return;
     }
 
-    setError("");
+    localStorage.setItem("token", "mocked-auth-token");
     navigate("/");
   };
 
