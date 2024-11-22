@@ -1,11 +1,11 @@
 :root {
   /* Main colors */
   --color-primary: #f2b807;
-  --color-second: #f28f16;
+  --color-secondary: #f28f16;
   --color-third: #f5db13;
   --color-danger: #d93e30;
   --color-white: #f6f7f9;
-  --color-dark: #212121;
+  --color-black: #212121;
 
   /* Pokémon Types */
   --color-normal: #a8a878;
