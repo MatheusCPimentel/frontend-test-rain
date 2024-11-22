@@ -24,10 +24,9 @@ export async function fetchWrapper<T = unknown>(
   };
 
   if (!data.ok) {
-    return {
-      data: null as T,
-      responseInfo,
-    };
+    throw new Error(
+      `HTTP Error: ${data.status} ${data.statusText} at ${data.url}`
+    );
   }
 
   const result: T = await data.json();
