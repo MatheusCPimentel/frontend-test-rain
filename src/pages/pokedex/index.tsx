@@ -7,6 +7,22 @@ export function Pokedex() {
   const [isTypeModalOpen, setIsTypeModalOpen] = useState(false);
   const [hasToShowOnlyFavorites, setHasToShowOnlyFavorites] = useState(false);
 
+  const [pokemonTypes, setPokemonTypes] = useState<Record<string, boolean>>({
+    Fire: false,
+    Water: false,
+    Grass: false,
+    Electric: false,
+    Poison: false,
+    Flying: false,
+  });
+
+  const toggleType = (type: string) => {
+    setPokemonTypes((prev) => ({
+      ...prev,
+      [type]: !prev[type],
+    }));
+  };
+
   return (
     <div className={styles.pokedex}>
       <header>
@@ -29,10 +45,21 @@ export function Pokedex() {
 
             {isTypeModalOpen && (
               <div className={styles.typeModal}>
-                <div>Test</div>
-                <div>Test</div>
-                <div>Test</div>
-                <div>Test</div>
+                {Object.keys(pokemonTypes).map((type) => (
+                  <label
+                    key={type}
+                    className={styles.typeOption}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={pokemonTypes[type]}
+                      onChange={() => toggleType(type)}
+                    />
+
+                    <span>{type}</span>
+                  </label>
+                ))}
               </div>
             )}
           </div>
