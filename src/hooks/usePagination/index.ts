@@ -5,6 +5,7 @@ export const usePagination = (initialPage: number) => {
 
   const goToPage = (page: number) => {
     setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const nextPage = () => {
