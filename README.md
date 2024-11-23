@@ -4,6 +4,12 @@ Welcome to the Pokédex App! This is a modern and responsive web application for
 
 ---
 
+<br />
+
+![Desktop GIF](public/media/desktop/gif.gif)
+
+---
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -12,7 +18,7 @@ Welcome to the Pokédex App! This is a modern and responsive web application for
 - [API](#api)
 - [How to Run Locally](#how-to-run-locally)
 - [Scripts](#scripts)
-- [Responsiveness](#responsiveness)
+- [Responsiveness and Media](#responsiveness-and-media)
 
 ---
 
@@ -114,22 +120,22 @@ The app will be available at **[http://localhost:5173](http://localhost:5173)**.
 
 ---
 
-## Responsiveness
+## Responsiveness and Media
 
 The app was built with a **mobile-first approach** to ensure excellent usability across all screen sizes. Key breakpoints include:
 
-- Mobile: Below `768px`.
-- Tablet: Between `768px` and `1024px`.
-- Desktop: Above `1024px`.
+- **Mobile**: Below `768px`
 
----
+  ![Mobile GIF](public/media/mobile/gif.gif)
 
-## **Screenshots**
+  ![Mobile Login](public/media/mobile/login.png)
+  ![Mobile Home](public/media/mobile/home.png)
+  ![Mobile Pokédex](public/media/mobile/pokedex.png)
 
-### **Home Page**
+- **Desktop**: Above `1024px`
 
-![Home Page](https://via.placeholder.com/800x400)
+  ![Desktop GIF](public/media/desktop/gif.gif)
 
-### **Pokédex Page**
-
-![Pokédex Page](https://via.placeholder.com/800x400)
+  ![Desktop Login](public/media/desktop/login.png)
+  ![Desktop Home](public/media/desktop/home.png)
+  ![Desktop Pokédex](public/media/desktop/pokedex.png)
