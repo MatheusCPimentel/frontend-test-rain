@@ -122,18 +122,24 @@ The app will be available at **[http://localhost:5173](http://localhost:5173)**.
 
 The app was built with a **mobile-first approach** to ensure excellent usability across all screen sizes. Key breakpoints include:
 
-- **Mobile**: Below `768px`
+### Mobile: Below `768px`
 
-  ![Mobile GIF](public/media/mobile/gif.gif)
+![Mobile GIF](public/media/mobile/gif.gif)
 
-  ![Mobile Login](public/media/mobile/login.png)
-  ![Mobile Home](public/media/mobile/home.png)
-  ![Mobile Pokédex](public/media/mobile/pokedex.png)
+![Mobile Login](public/media/mobile/login.png)
 
-- **Desktop**: Above `1024px`
+![Mobile Home](public/media/mobile/home.png)
 
-  ![Desktop GIF](public/media/desktop/gif.gif)
+![Mobile Pokédex](public/media/mobile/pokedex.png)
 
-  ![Desktop Login](public/media/desktop/login.png)
-  ![Desktop Home](public/media/desktop/home.png)
-  ![Desktop Pokédex](public/media/desktop/pokedex.png)
+---
+
+### Desktop: Above `1024px`
+
+![Desktop GIF](public/media/desktop/gif.gif)
+
+![Desktop Login](public/media/desktop/login.png)
+
+![Desktop Home](public/media/desktop/home.png)
+
+![Desktop Pokédex](public/media/desktop/pokedex.png)
