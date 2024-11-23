@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { fetchWrapper } from "../services/api";
-import { Pokemon } from "../types/pokemon";
-import { PokemonPagination } from "../types/pokemonPagination";
+import { fetchWrapper } from "../../services/api";
+import { Pokemon } from "../../types/pokemon";
+import { PokemonPagination } from "../../types/pokemonPagination";
 
 export const usePokemons = (itemsPerPage: number) => {
   const [pokemonsToShow, setPokemonsToShow] = useState<Pokemon[]>([]);
@@ -28,6 +28,7 @@ export const usePokemons = (itemsPerPage: number) => {
           const { data } = await fetchWrapper<Pokemon>(
             `pokemon/${pokemon.name}`
           );
+
           return data;
         })
       );

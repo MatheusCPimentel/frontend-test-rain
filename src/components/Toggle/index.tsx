@@ -21,6 +21,7 @@ export function Toggle({
           checked={isChecked}
           onChange={(e) => setIsChecked(e.target.checked)}
         />
+
         <span className={styles.slider} />
       </div>
 

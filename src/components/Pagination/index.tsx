@@ -11,17 +11,17 @@ export function Pagination({
   totalPages,
   onPageChange,
 }: PaginationProps) {
-  const handlePrevPage = () => {
+  const handleGoToPrevPage = () => {
     if (currentPage > 1) onPageChange(currentPage - 1);
   };
 
-  const handleNextPage = () => {
+  const handleGoToNextPage = () => {
     if (currentPage < totalPages) onPageChange(currentPage + 1);
   };
 
   return (
     <div className={styles.pagination}>
-      <button onClick={handlePrevPage} disabled={currentPage === 1}>
+      <button onClick={handleGoToPrevPage} disabled={currentPage === 1}>
         Prev
       </button>
 
@@ -29,7 +29,10 @@ export function Pagination({
         Page {currentPage} of {totalPages}
       </span>
 
-      <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+      <button
+        onClick={handleGoToNextPage}
+        disabled={currentPage === totalPages}
+      >
         Next
       </button>
     </div>

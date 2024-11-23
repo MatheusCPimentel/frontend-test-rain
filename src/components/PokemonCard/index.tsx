@@ -17,10 +17,14 @@ export function PokemonCard({
   const mainType = pokemon.types?.[0]?.type?.name || "unknown";
 
   return (
-    <div className={`${styles.pokemonCard} ${styles[mainType]}`}>
+    <div
+      className={`${styles.pokemonCard} ${styles[mainType]}`}
+      data-testid="pokemon-card"
+    >
       <div
         className={styles.favoriteIcon}
         onClick={() => toggleFavorite(pokemon)}
+        data-testid="favorite-icon"
       >
         <Heart size={24} fill={isFavorite ? "red" : "none"} color="red" />
       </div>
