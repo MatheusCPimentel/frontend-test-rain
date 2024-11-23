@@ -4,8 +4,6 @@ Welcome to the Pokédex App! This is a modern and responsive web application for
 
 ---
 
-<br />
-
 ![Desktop GIF](public/media/desktop/gif.gif)
 
 ---
