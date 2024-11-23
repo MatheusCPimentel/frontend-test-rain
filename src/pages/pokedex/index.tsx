@@ -18,6 +18,7 @@ export function Pokedex() {
     fetchPokemonsByPage,
     searchWithDebounce,
     isLoadingPokemons,
+    isDebouncingPokemons,
   } = usePokemons(ITEMS_PER_PAGE);
 
   const { favorites, toggleFavorite } = useFavorites();
@@ -35,7 +36,9 @@ export function Pokedex() {
   const displayedPokemons = hasToShowOnlyFavorites ? favorites : pokemonsToShow;
 
   const hasToShowPagination =
-    !hasToShowOnlyFavorites && !pokemonInputValue.trim() && !isLoadingPokemons;
+    !isDebouncingPokemons &&
+    !hasToShowOnlyFavorites &&
+    !pokemonInputValue.trim();
 
   const handleSearch = (value: string) => {
     setPokemonInputValue(value);

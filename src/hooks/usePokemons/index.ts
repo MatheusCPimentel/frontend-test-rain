@@ -67,9 +67,13 @@ export const usePokemons = (itemsPerPage: number) => {
         } else {
           fetchPokemonsByPage(currentPage);
         }
+
+        setDebouncedSearch(null);
       }, 500)
     );
   };
+
+  const isDebouncingPokemons = debouncedSearch !== null;
 
   return {
     pokemonsToShow,
@@ -78,5 +82,6 @@ export const usePokemons = (itemsPerPage: number) => {
     fetchPokemonsByPage,
     searchWithDebounce,
     isLoadingPokemons,
+    isDebouncingPokemons,
   };
 };
