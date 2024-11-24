@@ -41,7 +41,7 @@ This project demonstrates front-end skills by implementing:
 - Toggle to show only favorite Pokémon.
 - Responsive design for desktop, tablet, and mobile screens.
 - Skeleton loading placeholders while fetching data.
-- A login page is already implemented, designed to handle authentication. Currently, it uses a mock token stored in localStorage, but it's ready to be extended with backend functionality.
+- A login page is already implemented, designed to handle authentication. Currently, it uses a mock token that is stored in localStorage on first log in, but it's ready to be extended with backend functionality. For now, just type a valid e-mail and a valid password and you'll be logged in on `Login` button click.
 
 ---
 
@@ -88,7 +88,7 @@ This project consumes data from the [PokéAPI](https://pokeapi.co/).
 
 ```bash
 git clone git@github.com:MatheusCPimentel/frontend-test-rain.git
-cd front-end-test-rain
+cd frontend-test-rain
 ```
 
 ### **2. Install Dependencies**
